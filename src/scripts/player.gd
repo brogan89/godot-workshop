@@ -1,22 +1,48 @@
-extends Sprite2D
+extends Node2D
 
-var SPEED := 500.0
+var SPEED := 100.0
 
 func _ready():
-	print("hello world")
+	_play_animations(Vector2.ZERO)
 	
 func _process(delta: float) -> void:
 	_move_player(delta)
-	frame = (frame + 1) % 4
-	
 
 ## Moves the player
 func _move_player(delta: float) -> void:
+	var velocity : Vector2
+	
 	if Input.is_action_pressed("up"):
-		position.y -= 1 * delta * SPEED
+		velocity.y -= 1
 	if Input.is_action_pressed("down"):
-		position.y += 1 * delta * SPEED
+		velocity.y += 1
 	if Input.is_action_pressed("left"):
-		position.x -= 1 * delta * SPEED
+		velocity.x -= 1
 	if Input.is_action_pressed("right"):
-		position.x += 1 * delta * SPEED
+		velocity.x += 1
+	
+	position += velocity.normalized() * delta * SPEED
+	_play_animations(velocity.normalized())
+	
+	
+func _play_animations(velocity: Vector2) -> void:
+	# no movement
+	if velocity == Vector2.ZERO:
+		$AnimatedSprite2D.play("idle")
+	
+	# diagonal
+	
+	
+	# cardianal
+	if velocity.y < 0:
+		$AnimatedSprite2D.play("north")
+	if velocity.y > 0:
+		$AnimatedSprite2D.play("south")
+	if velocity.x < 0:
+		$AnimatedSprite2D.play("side")
+		$AnimatedSprite2D.flip_h = true
+	if velocity.x > 0:
+		$AnimatedSprite2D.play("side")
+		$AnimatedSprite2D.flip_h = false
+		
+		
