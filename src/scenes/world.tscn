@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://jtibxuqkb4e6"]
+
+[ext_resource type="Script" uid="uid://cbghr1arml4us" path="res://scripts/player.gd" id="2_rwgxs"]
+[ext_resource type="Texture2D" uid="uid://bcses2rhxbw45" path="res://art/topdown_shooter/characters/1_south.png" id="5_i7141"]
+
+[node name="World" type="Node2D"]
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(393, 193)
+texture = ExtResource("5_i7141")
+hframes = 4
+script = ExtResource("2_rwgxs")
