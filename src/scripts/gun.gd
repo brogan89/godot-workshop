@@ -1,7 +1,8 @@
 extends Node2D
 class_name Gun
 
-@export var _gun_resourse : GunResource
+@export var _resourse : GunResource
+@export var _muzzle : Marker2D
 
 var _gun_positions := {
 	"up": Vector2(0, -10),
@@ -13,7 +14,7 @@ var _gun_positions := {
 
 func set_sprite(anim_name: String) -> void:
 	# set texture
-	var texture := _gun_resourse.get_sprite(anim_name)
+	var texture := _resourse.get_sprite(anim_name)
 	$GunSprite.texture = texture
 	
 	# set position
@@ -25,4 +26,10 @@ func flip_h(flip: bool) -> void:
 		scale.x = -1
 	else:
 		scale.x = 1
-	
+
+func shoot() -> void:
+	var bullet := Bullet.new()
+	get_tree().root.add_child(bullet)
+	bullet.texture = load("res://art/topdown_shooter/other/bulleta.png")
+	bullet.global_position = _muzzle.global_position
+	bullet.direction = (get_global_mouse_position() - _muzzle.global_position).normalized()

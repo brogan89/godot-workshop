@@ -74,3 +74,6 @@ func _handle_cross_hair() -> void:
 func _handle_gun() -> void:
 	_gun.flip_h(_player_animations.flip_h)
 	_gun.set_sprite(_player_animations.animation)
+	
+	if Input.is_action_just_pressed("shoot"):
+		_gun.shoot()

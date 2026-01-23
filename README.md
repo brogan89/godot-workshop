@@ -14,3 +14,4 @@ Art Assets: https://finalbossblues.itch.io/pixel-shooter-towers-asset-pack
 - Player aiming cross hair
 - Player animations look at cross hair
 - Add gun (Intro to Resource class)
+- Shoot gun (Projectiles)

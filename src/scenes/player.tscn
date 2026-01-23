@@ -220,18 +220,20 @@ sprite_frames = SubResource("SpriteFrames_qfnet")
 animation = &"down"
 speed_scale = 2.0
 offset = Vector2(0, -9)
-flip_h = true
 
 [node name="CrossHair" type="AnimatedSprite2D" parent="."]
 position = Vector2(40, -21)
 sprite_frames = SubResource("SpriteFrames_fjrip")
 animation = &"cross_hair_1"
 
-[node name="Gun" type="Node2D" parent="."]
-scale = Vector2(-1, 1)
+[node name="Gun" type="Node2D" parent="." node_paths=PackedStringArray("_muzzle")]
 script = ExtResource("10_d2wvv")
-_gun_resourse = ExtResource("11_3v2ag")
+_resourse = ExtResource("11_3v2ag")
+_muzzle = NodePath("GunSprite/Marker2D")
 
 [node name="GunSprite" type="Sprite2D" parent="Gun"]
 position = Vector2(10, 5)
 texture = ExtResource("10_y4r1p")
+
+[node name="Marker2D" type="Marker2D" parent="Gun/GunSprite"]
+position = Vector2(11, 1)
