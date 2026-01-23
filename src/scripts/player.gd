@@ -21,28 +21,50 @@ func _move_player(delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		velocity.x += 1
 	
-	position += velocity.normalized() * delta * SPEED
-	_play_animations(velocity.normalized())
+	velocity = velocity.normalized()
 	
-	
+	position += velocity * delta * SPEED
+	_play_animations(velocity)
+
 func _play_animations(velocity: Vector2) -> void:
+	var s := $AnimatedSprite2D
+
 	# no movement
-	if velocity == Vector2.ZERO:
-		$AnimatedSprite2D.play("idle")
-	
-	# diagonal
-	
-	
-	# cardianal
-	if velocity.y < 0:
-		$AnimatedSprite2D.play("north")
-	if velocity.y > 0:
-		$AnimatedSprite2D.play("south")
-	if velocity.x < 0:
-		$AnimatedSprite2D.play("side")
-		$AnimatedSprite2D.flip_h = true
-	if velocity.x > 0:
-		$AnimatedSprite2D.play("side")
-		$AnimatedSprite2D.flip_h = false
-		
-		
+	if velocity.length_squared() < 0.0001:
+		s.play("idle")
+		return
+
+	# Decide direction by comparing axis magnitudes
+	# (works nicely even if v isn't perfectly normalized)
+	var ax : float = abs(velocity.x)
+	var ay : float = abs(velocity.y)
+
+	var diag_threshold := 0.1
+	var is_diag : bool = ax > diag_threshold and ay > diag_threshold
+
+	if is_diag:
+		if velocity.y < 0: # north-ish
+			if velocity.x > 0:
+				s.play("diag_up")   # make sure this anim exists
+				s.flip_h = false
+			else:
+				s.play("diag_up")
+				s.flip_h = true
+		else: # south-ish
+			if velocity.x > 0:
+				s.play("diag_down")
+				s.flip_h = false
+			else:
+				s.play("diag_down")
+				s.flip_h = true
+		return
+
+	# Cardinal fallback (pick dominant axis)
+	if ay >= ax:
+		if velocity.y < 0:
+			s.play("north")
+		else:
+			s.play("south")
+	else:
+		s.play("side")
+		s.flip_h = velocity.x < 0
