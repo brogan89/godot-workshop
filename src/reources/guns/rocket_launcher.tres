@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="GunResource" load_steps=7 format=3 uid="uid://bm6c6fv4kn6ha"]
+
+[ext_resource type="Texture2D" uid="uid://clj05yej60lek" path="res://art/topdown_shooter/guns/rocket/rocket_diagdown.png" id="1_huw5c"]
+[ext_resource type="Script" uid="uid://b3y7igf2uyajk" path="res://scripts/gun_resource.gd" id="1_jnphb"]
+[ext_resource type="Texture2D" uid="uid://cuvsi76xj5i7n" path="res://art/topdown_shooter/guns/rocket/rocket_diagup.png" id="2_ixs3t"]
+[ext_resource type="Texture2D" uid="uid://ccpx4k0y37onm" path="res://art/topdown_shooter/guns/rocket/rocket_down.png" id="3_qn04b"]
+[ext_resource type="Texture2D" uid="uid://cplylymv7ap5k" path="res://art/topdown_shooter/guns/rocket/rocket_side.png" id="5_6biqj"]
+[ext_resource type="Texture2D" uid="uid://52ossjphydow" path="res://art/topdown_shooter/guns/rocket/rocket_up.png" id="6_5iwnl"]
+
+[resource]
+script = ExtResource("1_jnphb")
+up = ExtResource("6_5iwnl")
+down = ExtResource("3_qn04b")
+side = ExtResource("5_6biqj")
+diag_up = ExtResource("2_ixs3t")
+diag_down = ExtResource("1_huw5c")
+metadata/_custom_type_script = "uid://b3y7igf2uyajk"

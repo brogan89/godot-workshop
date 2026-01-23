@@ -4,14 +4,13 @@ var SPEED := 100.0
 
 @export var _player_animations : AnimatedSprite2D
 @export var _cross_hair : AnimatedSprite2D
-
-func _ready():
-	_play_animations()
+@export var _gun : Gun
 	
 func _process(delta: float) -> void:
 	_move_player(delta)
 	_play_animations()
 	_handle_cross_hair()
+	_handle_gun()
 	
 ## Moves the player
 func _move_player(delta: float) -> void:
@@ -28,6 +27,11 @@ func _move_player(delta: float) -> void:
 	
 	velocity = velocity.normalized()
 	position += velocity * delta * SPEED
+	if velocity.length_squared() < 0.001:
+		_player_animations.speed_scale = 0
+	else:
+		_player_animations.speed_scale = 2
+		
 
 func _play_animations() -> void:
 	var dir = get_global_mouse_position() - self.get_global_position()
@@ -57,12 +61,16 @@ func _play_animations() -> void:
 		# Cardinal fallback (pick dominant axis)
 		if ay >= ax:
 			if velocity.y < 0:
-				_player_animations.play("north")
+				_player_animations.play("up")
 			else:
-				_player_animations.play("south")
+				_player_animations.play("down")
 		else:
 			_player_animations.play("side")
 
 func _handle_cross_hair() -> void:
 	_cross_hair.play("cross_hair_1")
 	_cross_hair.global_position = get_global_mouse_position()
+
+func _handle_gun() -> void:
+	_gun.flip_h(_player_animations.flip_h)
+	_gun.set_sprite(_player_animations.animation)
