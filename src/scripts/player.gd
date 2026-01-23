@@ -2,12 +2,17 @@ extends Node2D
 
 var SPEED := 100.0
 
+@export var _player_animations : AnimatedSprite2D
+@export var _cross_hair : AnimatedSprite2D
+
 func _ready():
-	_play_animations(Vector2.ZERO)
+	_play_animations()
 	
 func _process(delta: float) -> void:
 	_move_player(delta)
-
+	_play_animations()
+	_handle_cross_hair()
+	
 ## Moves the player
 func _move_player(delta: float) -> void:
 	var velocity : Vector2
@@ -22,49 +27,42 @@ func _move_player(delta: float) -> void:
 		velocity.x += 1
 	
 	velocity = velocity.normalized()
-	
 	position += velocity * delta * SPEED
-	_play_animations(velocity)
 
-func _play_animations(velocity: Vector2) -> void:
-	var s := $AnimatedSprite2D
-
-	# no movement
-	if velocity.length_squared() < 0.0001:
-		s.play("idle")
-		return
-
+func _play_animations() -> void:
+	var dir = get_global_mouse_position() - self.get_global_position()
+	var velocity := dir.normalized();
+	
 	# Decide direction by comparing axis magnitudes
-	# (works nicely even if v isn't perfectly normalized)
 	var ax : float = abs(velocity.x)
 	var ay : float = abs(velocity.y)
 
 	var diag_threshold := 0.1
-	var is_diag : bool = ax > diag_threshold and ay > diag_threshold
+	var is_diag := ax > diag_threshold and ay > diag_threshold
+
+	_player_animations.flip_h = velocity.x < 0
 
 	if is_diag:
 		if velocity.y < 0: # north-ish
 			if velocity.x > 0:
-				s.play("diag_up")   # make sure this anim exists
-				s.flip_h = false
+				_player_animations.play("diag_up")
 			else:
-				s.play("diag_up")
-				s.flip_h = true
+				_player_animations.play("diag_up")
 		else: # south-ish
 			if velocity.x > 0:
-				s.play("diag_down")
-				s.flip_h = false
+				_player_animations.play("diag_down")
 			else:
-				s.play("diag_down")
-				s.flip_h = true
-		return
-
-	# Cardinal fallback (pick dominant axis)
-	if ay >= ax:
-		if velocity.y < 0:
-			s.play("north")
-		else:
-			s.play("south")
+				_player_animations.play("diag_down")
 	else:
-		s.play("side")
-		s.flip_h = velocity.x < 0
+		# Cardinal fallback (pick dominant axis)
+		if ay >= ax:
+			if velocity.y < 0:
+				_player_animations.play("north")
+			else:
+				_player_animations.play("south")
+		else:
+			_player_animations.play("side")
+
+func _handle_cross_hair() -> void:
+	_cross_hair.play("cross_hair_1")
+	_cross_hair.global_position = get_global_mouse_position()
