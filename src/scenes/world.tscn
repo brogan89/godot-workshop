@@ -1,15 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://jtibxuqkb4e6"]
 
 [ext_resource type="PackedScene" uid="uid://dn00j7gam0j7e" path="res://scenes/player.tscn" id="1_nnsk1"]
-[ext_resource type="Texture2D" uid="uid://b0b11lw20kr8v" path="res://art/topdown_shooter/towers/cannon/1_down.png" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://kix8cyqyd2ig" path="res://scenes/tower.tscn" id="2_rwgxs"]
 
 [node name="World" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
-position = Vector2(88, 30)
+position = Vector2(61, 45)
 
-[node name="Tower" type="Sprite2D" parent="."]
-y_sort_enabled = true
-position = Vector2(178, 91)
-texture = ExtResource("2_rwgxs")
-offset = Vector2(0, -14)
+[node name="Tower" parent="." instance=ExtResource("2_rwgxs")]
+position = Vector2(136, 70)

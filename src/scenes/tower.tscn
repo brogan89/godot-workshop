@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://kix8cyqyd2ig"]
+
+[ext_resource type="Texture2D" uid="uid://b0b11lw20kr8v" path="res://art/topdown_shooter/towers/cannon/1_down.png" id="1_2x682"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rwgxs"]
+radius = 8.0
+height = 18.050003
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2x682"]
+radius = 8.0
+
+[node name="Tower" type="StaticBody2D"]
+collision_mask = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+y_sort_enabled = true
+texture = ExtResource("1_2x682")
+offset = Vector2(0, -14)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6.355)
+shape = SubResource("CapsuleShape2D_rwgxs")
+
+[node name="TowerHitArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerHitArea"]
+position = Vector2(0, -12)
+shape = SubResource("CapsuleShape2D_2x682")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://btqn8d4c15eeq"]
+
+[ext_resource type="Script" uid="uid://cqduxe28mnffa" path="res://scripts/bullet.gd" id="1_njpd3"]
+[ext_resource type="Texture2D" uid="uid://dvrdswxm8ioeo" path="res://art/topdown_shooter/other/bulleta.png" id="2_en4vu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c8fcr"]
+radius = 4.0
+
+[node name="Bullet" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_njpd3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_c8fcr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_en4vu")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

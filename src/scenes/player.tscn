@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dn00j7gam0j7e"]
+[gd_scene load_steps=37 format=3 uid="uid://dn00j7gam0j7e"]
 
 [ext_resource type="Script" uid="uid://cbghr1arml4us" path="res://scripts/player.gd" id="1_fjrip"]
 [ext_resource type="Texture2D" uid="uid://cd1sombet7cll" path="res://art/topdown_shooter/characters/1_diagdown.png" id="2_smehm"]
@@ -12,6 +12,10 @@
 [ext_resource type="Script" uid="uid://urww3b8dqnh4" path="res://scripts/gun.gd" id="10_d2wvv"]
 [ext_resource type="Texture2D" uid="uid://cplylymv7ap5k" path="res://art/topdown_shooter/guns/rocket/rocket_side.png" id="10_y4r1p"]
 [ext_resource type="Resource" uid="uid://bm6c6fv4kn6ha" path="res://reources/guns/rocket_launcher.tres" id="11_3v2ag"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3v2ag"]
+radius = 6.0
+height = 14.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xo05s"]
 atlas = ExtResource("2_smehm")
@@ -207,12 +211,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("_player_animations", "_cross_hair", "_gun")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_player_animations", "_cross_hair", "_gun")]
 y_sort_enabled = true
 script = ExtResource("1_fjrip")
 _player_animations = NodePath("PlayerAnimation")
 _cross_hair = NodePath("CrossHair")
 _gun = NodePath("Gun")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+top_level = true
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_3v2ag")
 
 [node name="PlayerAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, 9)
