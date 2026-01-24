@@ -32,6 +32,7 @@ func flip_h(flip: bool) -> void:
 		scale.x = 1
 
 func shoot() -> void:
+	$GunAudio.play()
 	var bullet : Bullet = _bullet_scene.instantiate()
 	bullet.name = "Bullet_" + str(_shot_count)
 	get_tree().root.add_child(bullet)

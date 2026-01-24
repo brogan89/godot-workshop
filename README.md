@@ -3,7 +3,7 @@
 A simple 2D top-down shooter game using GdScript.
 
 Art Assets: https://finalbossblues.itch.io/pixel-shooter-towers-asset-pack
-
+SFX: https://www.bfxr.net/
 
 ## Process
 
@@ -16,3 +16,4 @@ Art Assets: https://finalbossblues.itch.io/pixel-shooter-towers-asset-pack
 - Add gun (Intro to Resource class)
 - Shoot gun (Projectiles)
 - Collision detection and explosions
+- Audio SFX

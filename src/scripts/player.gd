@@ -4,13 +4,18 @@ var SPEED := 100.0
 
 @export var _player_animations : AnimatedSprite2D
 @export var _cross_hair : AnimatedSprite2D
+@export var _foot_step : AudioStreamPlayer2D
 @export var _gun : Gun
+
+const FOOTSTEP_TIME = 0.25
+var _footstep_timeout := 0.0
 	
 func _process(delta: float) -> void:
 	_move_player(delta)
 	_play_animations()
 	_handle_cross_hair()
 	_handle_gun()
+	_handle_footsteps(delta)
 	
 ## Moves the player
 func _move_player(delta: float) -> void:
@@ -29,11 +34,11 @@ func _move_player(delta: float) -> void:
 	move_and_slide()
 	
 	position += velocity * delta * SPEED
+	
 	if velocity.length_squared() < 0.001:
 		_player_animations.speed_scale = 0
 	else:
 		_player_animations.speed_scale = 2
-		
 
 func _play_animations() -> void:
 	var dir = (get_global_mouse_position() - get_global_position()).normalized()
@@ -78,3 +83,12 @@ func _handle_gun() -> void:
 	
 	if Input.is_action_just_pressed("shoot"):
 		_gun.shoot()
+
+func _handle_footsteps(delta: float) -> void:
+	_footstep_timeout -= delta
+	if _footstep_timeout > 0:
+		return
+	_footstep_timeout = FOOTSTEP_TIME
+	if velocity.length_squared() > 0.001 and not _foot_step.playing:
+		_foot_step.pitch_scale = randf_range(0.75, 1.25)
+		_foot_step.play()
