@@ -21,3 +21,7 @@ SFX: https://www.bfxr.net/
 - Enemies (health and death)
 - Add Pickup (new weapon)
 - Add hurting tower
+
+---
+
+![screenshot](./assets/screenshot.png)
