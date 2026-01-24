@@ -215,6 +215,7 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_player_animations", "_cross_hair", "_foot_step", "_gun")]
 y_sort_enabled = true
+motion_mode = 1
 script = ExtResource("1_fjrip")
 _player_animations = NodePath("PlayerAnimation")
 _cross_hair = NodePath("CrossHair")
@@ -244,7 +245,7 @@ stream = ExtResource("10_f1ej7")
 
 [node name="Gun" type="Node2D" parent="." node_paths=PackedStringArray("_muzzle")]
 script = ExtResource("10_d2wvv")
-_resourse = ExtResource("11_3v2ag")
+_resource = ExtResource("11_3v2ag")
 _muzzle = NodePath("GunSprite/Marker2D")
 
 [node name="GunSprite" type="Sprite2D" parent="Gun"]

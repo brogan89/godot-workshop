@@ -7,6 +7,7 @@ class_name GunResource
 @export var diag_up : Texture2D
 @export var diag_down : Texture2D
 @export var bullet : Texture2D
+@export var damage : float = 100
 
 func get_sprite(name: String) -> Texture2D:
 	match name:

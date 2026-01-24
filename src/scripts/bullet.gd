@@ -1,8 +1,9 @@
 extends Area2D
 class_name Bullet
 
-var direction : Vector2
 var speed : float = 200
+var direction : Vector2
+var damage : float
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

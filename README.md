@@ -17,3 +17,4 @@ SFX: https://www.bfxr.net/
 - Shoot gun (Projectiles)
 - Collision detection and explosions
 - Audio SFX
+- Enemies (health and death)

@@ -1,6 +1,9 @@
 extends CharacterBody2D
+class_name Player
 
-var SPEED := 100.0
+static var Position : Vector2
+
+const SPEED := 100.0
 
 @export var _player_animations : AnimatedSprite2D
 @export var _cross_hair : AnimatedSprite2D
@@ -10,15 +13,15 @@ var SPEED := 100.0
 const FOOTSTEP_TIME = 0.25
 var _footstep_timeout := 0.0
 	
-func _process(delta: float) -> void:
-	_move_player(delta)
+func _physics_process(delta: float) -> void:
+	_move_player()
 	_play_animations()
 	_handle_cross_hair()
 	_handle_gun()
 	_handle_footsteps(delta)
 	
 ## Moves the player
-func _move_player(delta: float) -> void:
+func _move_player() -> void:
 	velocity = Vector2.ZERO
 	
 	if Input.is_action_pressed("up"):
@@ -30,10 +33,9 @@ func _move_player(delta: float) -> void:
 	if Input.is_action_pressed("right"):
 		velocity.x += 1
 	
-	velocity = velocity.normalized()
+	velocity = velocity * SPEED
 	move_and_slide()
-	
-	position += velocity * delta * SPEED
+	Position = global_position
 	
 	if velocity.length_squared() < 0.001:
 		_player_animations.speed_scale = 0

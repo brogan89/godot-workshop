@@ -1,7 +1,7 @@
 extends Node2D
 class_name Gun
 
-@export var _resourse : GunResource
+@export var _resource : GunResource
 @export var _muzzle : Marker2D
 
 @onready var _bullet_scene : PackedScene = preload("res://scenes/bullet.tscn")
@@ -18,7 +18,7 @@ var _gun_positions := {
 
 func set_sprite(anim_name: String) -> void:
 	# set texture
-	var texture := _resourse.get_sprite(anim_name)
+	var texture := _resource.get_sprite(anim_name)
 	$GunSprite.texture = texture
 	
 	# set position
@@ -36,7 +36,8 @@ func shoot() -> void:
 	var bullet : Bullet = _bullet_scene.instantiate()
 	bullet.name = "Bullet_" + str(_shot_count)
 	get_tree().root.add_child(bullet)
-	bullet.set_texture(_resourse.bullet)
+	bullet.set_texture(_resource.bullet)
+	bullet.damage = _resource.damage
 	bullet.global_position = _muzzle.global_position
 	bullet.direction = (get_global_mouse_position() - _muzzle.global_position).normalized()
 	_shot_count += 1
