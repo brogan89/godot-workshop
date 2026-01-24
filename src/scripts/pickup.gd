@@ -18,9 +18,6 @@ func _ready() -> void:
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_IN_OUT)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta: float) -> void:
-	#position.y += pingpong(50*delta, -1)
 
 func _on_body_entered(body: Node2D) -> void:
 	print("body entered: ", body.name)
@@ -29,4 +26,9 @@ func _on_body_entered(body: Node2D) -> void:
 		
 	var player := body as Player
 	player.on_pickup(_resource)
+	$AudioStreamPlayer2D.play()
+	$Sprite2D.hide()
+
+
+func _on_audio_stream_player_2d_finished() -> void:
 	queue_free()
