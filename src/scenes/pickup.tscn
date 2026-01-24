@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmqdu3ikwga1u"]
+
+[ext_resource type="Script" uid="uid://fouh2lj7253" path="res://scripts/pickup.gd" id="1_7cqbe"]
+[ext_resource type="Texture2D" uid="uid://m1gnikex803g" path="res://art/topdown_shooter/guns/shotgun/shot_side.png" id="1_pg2rt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pg2rt"]
+
+[node name="Pickup" type="Area2D"]
+script = ExtResource("1_7cqbe")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_pg2rt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_pg2rt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

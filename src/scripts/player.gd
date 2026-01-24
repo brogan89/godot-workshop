@@ -94,3 +94,7 @@ func _handle_footsteps(delta: float) -> void:
 	if velocity.length_squared() > 0.001 and not _foot_step.playing:
 		_foot_step.pitch_scale = randf_range(0.75, 1.25)
 		_foot_step.play()
+
+func on_pickup(gun_resource: GunResource) -> void:
+	_gun.set_data(gun_resource)
+	

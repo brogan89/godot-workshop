@@ -7,6 +7,7 @@ class_name Gun
 @onready var _bullet_scene : PackedScene = preload("res://scenes/bullet.tscn")
 
 var _shot_count := 0
+var _current_anim_state := ""
 
 var _gun_positions := {
 	"up": Vector2(0, -10),
@@ -16,7 +17,12 @@ var _gun_positions := {
 	"diag_down": Vector2(10, 10),
 }
 
+func set_data(resource : GunResource) -> void:
+	_resource = resource
+	set_sprite(_current_anim_state)
+
 func set_sprite(anim_name: String) -> void:
+	_current_anim_state = anim_name;
 	# set texture
 	var texture := _resource.get_sprite(anim_name)
 	$GunSprite.texture = texture

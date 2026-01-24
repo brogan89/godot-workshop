@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://jtibxuqkb4e6"]
+[gd_scene load_steps=7 format=3 uid="uid://jtibxuqkb4e6"]
 
 [ext_resource type="Script" uid="uid://brmnfswm5uscq" path="res://scripts/world.gd" id="1_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://dn00j7gam0j7e" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="PackedScene" uid="uid://kix8cyqyd2ig" path="res://scenes/tower.tscn" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://cqmenhpdamube" path="res://scenes/enemy.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://dmqdu3ikwga1u" path="res://scenes/pickup.tscn" id="5_71j4m"]
+[ext_resource type="Resource" uid="uid://bm6c6fv4kn6ha" path="res://reources/guns/rocket_launcher.tres" id="6_qfnet"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -13,7 +15,10 @@ script = ExtResource("1_4wyf3")
 position = Vector2(61, 45)
 
 [node name="Tower" parent="." instance=ExtResource("2_rwgxs")]
-position = Vector2(136, 70)
+position = Vector2(339, 34)
+
+[node name="Tower2" parent="." instance=ExtResource("2_rwgxs")]
+position = Vector2(159, 33)
 
 [node name="Enemy" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(297, 38)
@@ -32,3 +37,7 @@ position = Vector2(52, 209)
 
 [node name="Enemy6" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(120, 145)
+
+[node name="Pickup" parent="." instance=ExtResource("5_71j4m")]
+position = Vector2(389, 208)
+_resource = ExtResource("6_qfnet")

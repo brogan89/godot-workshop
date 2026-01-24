@@ -12,7 +12,7 @@
 [ext_resource type="Script" uid="uid://urww3b8dqnh4" path="res://scripts/gun.gd" id="10_d2wvv"]
 [ext_resource type="AudioStream" uid="uid://c8ru6u8ocgjex" path="res://audio/sfx/foot_step.wav" id="10_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://cplylymv7ap5k" path="res://art/topdown_shooter/guns/rocket/rocket_side.png" id="10_y4r1p"]
-[ext_resource type="Resource" uid="uid://bm6c6fv4kn6ha" path="res://reources/guns/rocket_launcher.tres" id="11_3v2ag"]
+[ext_resource type="Resource" uid="uid://dgtt4wn7tpknj" path="res://reources/guns/shotgun.tres" id="12_f1ej7"]
 [ext_resource type="AudioStream" uid="uid://bcabsbphti1xn" path="res://audio/sfx/shoot_0.wav" id="13_jej6c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3v2ag"]
@@ -245,7 +245,7 @@ stream = ExtResource("10_f1ej7")
 
 [node name="Gun" type="Node2D" parent="." node_paths=PackedStringArray("_muzzle")]
 script = ExtResource("10_d2wvv")
-_resource = ExtResource("11_3v2ag")
+_resource = ExtResource("12_f1ej7")
 _muzzle = NodePath("GunSprite/Marker2D")
 
 [node name="GunSprite" type="Sprite2D" parent="Gun"]
