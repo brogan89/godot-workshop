@@ -4,6 +4,11 @@ const SPEED = 20.0
 var health := 100.0
 var _is_dead := false
 
+func _ready() -> void:
+	$HealthBar.max_value = health
+	$HealthBar.step = 1
+	$HealthBar.value = health
+
 func _physics_process(delta: float) -> void:
 	_handle_movement()
 	_handle_animations()
@@ -35,11 +40,13 @@ func _handle_animations() -> void:
 
 func hurt(damage: float) -> void:
 	health -= damage
+	$HealthBar.value = health
 	if health <= 0:
 		_death()
 
 func _death() -> void:
 	$EnemyHitArea.queue_free()
+	$HealthBar.hide()
 	_is_dead = true
 
 func _on_enemy_hit_area_area_entered(area: Area2D) -> void:

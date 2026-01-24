@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://kix8cyqyd2ig"]
+[gd_scene load_steps=7 format=3 uid="uid://kix8cyqyd2ig"]
 
 [ext_resource type="Texture2D" uid="uid://b0b11lw20kr8v" path="res://art/topdown_shooter/towers/cannon/1_down.png" id="1_2x682"]
+[ext_resource type="Script" uid="uid://ugfc7kx8ot6u" path="res://scripts/tower.gd" id="1_ay4al"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rwgxs"]
 radius = 8.0
@@ -9,8 +10,15 @@ height = 18.050003
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2x682"]
 radius = 8.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2x682"]
+bg_color = Color(0.13319641, 0.13319641, 0.13319635, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ay4al"]
+bg_color = Color(0.67230505, 1.7688051e-06, 6.256998e-07, 1)
+
 [node name="Tower" type="StaticBody2D"]
 collision_mask = 3
+script = ExtResource("1_ay4al")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 y_sort_enabled = true
@@ -22,7 +30,21 @@ position = Vector2(0, -6.355)
 shape = SubResource("CapsuleShape2D_rwgxs")
 
 [node name="TowerHitArea" type="Area2D" parent="."]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TowerHitArea"]
 position = Vector2(0, -12)
 shape = SubResource("CapsuleShape2D_2x682")
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -9.0
+offset_top = -30.0
+offset_right = 9.0
+offset_bottom = -28.0
+theme_override_styles/background = SubResource("StyleBoxFlat_2x682")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ay4al")
+step = 1.0
+value = 58.0
+show_percentage = false
+
+[connection signal="area_entered" from="TowerHitArea" to="." method="_on_tower_hit_area_area_entered"]

@@ -19,3 +19,5 @@ SFX: https://www.bfxr.net/
 - Collision detection and explosions
 - Audio SFX
 - Enemies (health and death)
+- Add Pickup (new weapon)
+- Add hurting tower

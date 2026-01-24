@@ -10,21 +10,26 @@
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 script = ExtResource("1_4wyf3")
+_enemy_scene = ExtResource("4_k0juu")
+
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
 position = Vector2(61, 45)
 
 [node name="Tower" parent="." instance=ExtResource("2_rwgxs")]
-position = Vector2(339, 34)
+position = Vector2(361, 35)
 
 [node name="Tower2" parent="." instance=ExtResource("2_rwgxs")]
-position = Vector2(159, 33)
+position = Vector2(164, 237)
 
 [node name="Enemy" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(297, 38)
 
 [node name="Enemy2" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(304, 119)
+position = Vector2(455, 164)
 
 [node name="Enemy3" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(216, 232)
@@ -33,11 +38,16 @@ position = Vector2(216, 232)
 position = Vector2(320, 187)
 
 [node name="Enemy5" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(52, 209)
+position = Vector2(334, 244)
 
 [node name="Enemy6" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(120, 145)
+position = Vector2(403, 248)
+
+[node name="Enemy7" parent="." instance=ExtResource("4_k0juu")]
+position = Vector2(441, 87)
 
 [node name="Pickup" parent="." instance=ExtResource("5_71j4m")]
-position = Vector2(389, 208)
+position = Vector2(414, 208)
 _resource = ExtResource("6_qfnet")
+
+[connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

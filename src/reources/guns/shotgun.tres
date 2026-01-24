@@ -16,5 +16,5 @@ side = ExtResource("6_upbuv")
 diag_up = ExtResource("3_eyo4h")
 diag_down = ExtResource("2_g2b6t")
 bullet = ExtResource("1_gq1tq")
-damage = 50.0
+damage = 35.0
 metadata/_custom_type_script = "uid://b3y7igf2uyajk"

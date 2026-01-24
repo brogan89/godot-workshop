@@ -1,29 +1,32 @@
-extends Area2D
-class_name Bullet
+extends StaticBody2D
 
-var speed : float = 200
-var direction : Vector2
-var damage : float
+var health := 500.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	$HealthBar.max_value = health
+	$HealthBar.step = 1
+	$HealthBar.value = health
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	global_position += direction * delta * speed
+	pass
 
-func set_texture(texture: Texture) -> void:
-	$Sprite2D.texture = texture
+func hurt(damage: float) -> void:
+	health -= damage
+	$HealthBar.value = health
+	if health <= 0:
+		_death()
 
-func _on_area_entered(area: Area2D) -> void:
+func _death() -> void:
 	var explode_scene : PackedScene = load("res://scenes/explosion.tscn")
 	var explode_instance := explode_scene.instantiate() as AnimatedSprite2D
-	explode_instance.play("explode1")
+	explode_instance.play("explode2")
 	explode_instance.global_position = global_position
 	get_tree().root.add_child(explode_instance)
-	
 	queue_free()
 
-func _on_timer_timeout() -> void:
-	queue_free()
+func _on_tower_hit_area_area_entered(area: Area2D) -> void:
+	if area is Bullet:
+		var bullet := area as Bullet
+		hurt(bullet.damage)
